@@ -1,26 +1,45 @@
-import Link from 'next/link'
+const teams = [
+  {
+    name: 'Team Alpha',
+    project: 'AI Chatbot',
+    description: 'A chatbot that answers questions using AI.',
+    links: [{ label: 'GitHub', href: '#' }]
+  },
+  {
+    name: 'Team Beta',
+    project: 'Weather App',
+    description: 'A web app showing live weather data.',
+    links: [{ label: 'Live Demo', href: '#' }]
+  },
+  {
+    name: 'Team Gamma',
+    project: 'E-Commerce Site',
+    description: 'An online store for cool products.',
+    links: [{ label: 'Docs', href: '#' }]
+  },
+];
 
-export default function Home() {
+export const metadata = {
+  title: 'Teams | Al2'
+}
+
+export default function TeamsPage() {
   return (
-    <section className="grid gap-6 place-items-center text-center">
-      <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">Welcome to the Al2 Project Showcase</h1>
-      <p className="max-w-2xl text-lg text-gray-700">
-        Explore our curated list of teams and their projects. Clean, fast, and static — just like your example site.
-      </p>
-      <div className="flex gap-3">
-        <Link href="/teams" className="px-6 py-3 rounded-2xl bg-gray-900 text-white hover:opacity-90">View Teams</Link>
-        <a href="https://nextjs.org" target="_blank" className="px-6 py-3 rounded-2xl border border-gray-300 hover:bg-gray-100">Learn Next.js</a>
-      </div>
-      <div className="grid md:grid-cols-3 gap-4 w-full mt-10">
-        {[
-          { title: 'Fast', desc: 'Deployed on Vercel with global edge network.'},
-          { title: 'Simple', desc: 'Static content with zero databases.'},
-          { title: 'Scalable', desc: 'Add more teams just by editing one file.'},
-        ].map((c, i) => (
-          <div key={i} className="rounded-2xl border border-gray-200 bg-white p-6 text-left">
-            <h3 className="text-lg font-semibold">{c.title}</h3>
-            <p className="text-gray-600 mt-1">{c.desc}</p>
-          </div>
+    <section className="grid gap-6">
+      <h1 className="text-3xl font-bold text-center">Our Teams</h1>
+      <p className="text-center text-gray-700">Click into each card to explore links.</p>
+      <div className="grid md:grid-cols-3 gap-6">
+        {teams.map((t, idx) => (
+          <article key={idx} className="rounded-2xl border border-gray-200 bg-white p-6 hover:shadow transition">
+            <h2 className="text-xl font-semibold">{t.name}</h2>
+            <p className="text-gray-900 font-medium mt-1">{t.project}</p>
+            <p className="text-gray-600 mt-2">{t.description}</p>
+            <div className="flex flex-wrap gap-2 mt-4">
+              {t.links?.map((l, i) => (
+                <a key={i} href={l.href} target="_blank" className="text-sm px-3 py-1 rounded-full border hover:bg-gray-100">{l.label}</a>
+              ))}
+            </div>
+          </article>
         ))}
       </div>
     </section>
